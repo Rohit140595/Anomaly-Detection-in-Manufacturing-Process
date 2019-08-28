@@ -1,0 +1,2 @@
+# Anomaly-Detection-in-Manufacturing-Process
+Developed a method for estimating in-control distribution parameters on a dataset with 209 attributes to carry out the Phase-II analysis and to detect out of control data for future observations .Leveraged principal component analysis to reduce number of attributes to 4 which explained 80% variation of dataset .Utilized m-CUSUM, T2 and m-EWMA control charts and their combinations to analyze out of control &amp; in-control data.
