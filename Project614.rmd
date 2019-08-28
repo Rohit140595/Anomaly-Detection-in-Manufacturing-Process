@@ -1,0 +1,52 @@
+---
+title: "614 project"
+author: "Naisarg"
+date: "18 April 2019"
+output: word_document
+---
+
+```{r}
+library(readxl)
+Project_dataset <- read_excel("C:/Users/Admin/Desktop/ISEN614/Project_dataset.xlsx")
+
+
+#find the mean and var of various columns of the table
+apply(Project_dataset, 2, mean)
+apply(Project_dataset, 2, var)
+#apply PCA
+pr.out=prcomp(Project_dataset, scale=TRUE)
+names(pr.out)
+pr.out$center
+pr.out$scale
+pr.out$rotation
+dim(pr.out$x)
+
+#plotting
+biplot(pr.out, scale=0)
+pr.out$rotation=-pr.out$rotation
+pr.out$x=-pr.out$x
+biplot(pr.out, scale=0)
+#scree analysis
+pr.out$sdev
+pr.var=pr.out$sdev^2
+
+
+pr.var
+pve=round(pr.var*100/sum(pr.var), 1)
+print(pve)
+pve1 <- cumsum(pve)
+cols <- paste0("PC", seq(1, 209, 1))
+pc <- data.frame(cols, pve1)
+
+pc[pc$pve1 < 80, ]
+pc1 <- pr.out$x[,1:32]
+pc1[1]
+for (i in seq(1, 3)){
+print(i)
+qic(pc1[,i],chart = "i", title = paste("chart of PC", i))}
+
+plot(pve, xlab="Principal Component", ylab="Proportion of Variance Explained", ylim=c(0,1),type='b')
+plot(cumsum(pve), xlab="Principal Component", ylab="Cumulative Proportion of Variance Explained", ylim=c(0,1),type='b')
+#cusum
+
+```
